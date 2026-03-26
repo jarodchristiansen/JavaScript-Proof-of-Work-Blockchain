@@ -6,7 +6,9 @@ const cryptoHash = (...inputs) => {
   hash.update(
     inputs
       .map((input) => JSON.stringify(input))
-      .sort()
+      .sort((a, b) =>
+        a.localeCompare(b, "en", { sensitivity: "variant", numeric: true })
+      )
       .join(" ")
   );
   return hash.digest("hex");
